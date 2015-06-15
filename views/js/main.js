@@ -450,11 +450,39 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
+
+      var ramdomPizzas = document.getElementsByClassName('randomPizzaContainer');
+
+      //alert(size);
+      var pizzaContainerwidth = "33.33%";
+      switch(size) {
+          case "1":
+              newwidth = 25;
+			  break;
+          case "2":
+              newwidth = 33.33;
+			  break;
+          case "3":
+              newwidth = 50;
+			  break;
+          default:
+              console.log("bug in sizeSwitcher");
+      }
+
+	  var elemArray = Array.prototype.slice.apply(ramdomPizzas);
+
+	  for(var i = 0; i < elemArray.length; i++){
+          elemArray[i].style.width = newwidth +'%';
+      }
+
+      /*
+      for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
       var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
       var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
       document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
     }
+      */
+
   }
 
   changePizzaSizes(size);
@@ -469,7 +497,7 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-for (var i = 2; i < 100; i++) {
+for (var i = 2; i < 12; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
@@ -502,11 +530,34 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  var items = document.getElementsByClassName('mover');
+
+  var elemArray = Array.prototype.slice.apply(items);
+
+  var scrolltopitem = document.body.scrollTop;
+  
+  //calculate 5 phases
+  var phases = [];
+  for(var i=0; i<5;i++){
+	var phase = Math.sin((scrolltopitem / 1250) + (i % 5));
+	
+	phases[i] =  phase * 100;
   }
+  
+  
+  for (var i = 0; i < elemArray.length; i++) {
+	//console.log('inside loop: ' + document.body.scrollTop)
+  
+    //var phase = Math.sin((scrolltopitem / 1250) + (i % 5));
+	//console.log('in loop; phase for ['+ i + '] is: ' + phase);
+    //elemArray[i].style.left = elemArray[i].basicLeft + 100 * phase + 'px';
+	
+	//console.log('elemArray[i].basicLeft =' + elemArray[i].basicLeft)
+	//var shiftitem = (i % 5);
+	//console.log('shiftitem is:' + shiftitem);
+	elemArray[i].style.left = elemArray[i].basicLeft + phases[i % 5] + 'px';
+  }
+  
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -525,7 +576,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 60; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
