@@ -2,6 +2,38 @@
 
 Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
 
+## Steps to optimazed main.js for pizza.html ####
+
+1.  Reduce number pizza objects.
+    in line 502. There's no need to create 200 pizza objects all at once, a minimum of 12 is acceptable
+    the less pizza objects created,  the least time it takes to paint
+
+2. Reduce number of sliding pizzas
+    in line 577. There's no need to create 200 animated pizzas. a minimum of 60 is acceptable
+
+3. Refactor function changePizzaSizes in line 452. (Reducing Scripting Time)
+
+  I have remove 'document.querySelectorAll(".randomPizzaContainer")' from the function and inside the for loop
+  instead, I used the 'document.getElementsByClassName' function.
+  I also set the percentage width in a case statement inside the same function. no need to use an expensive function such as 'determineDx'.
+  Add all the pizza objects to an element array, and use a for loop to iterate thru those element and set the style width.
+  therefore, all calculations are done before hitting the loop.
+
+
+ 4. Refactor updatePositions function in line 529
+
+    I have remove 'document.querySelectorAll(".randomPizzaContainer")' from the function, instead, I used the 'document.getElementsByClassName' function.
+    Added the pizza objects to an array object
+    Calculate only five phases before the animation begins
+    Iterate thru all the element array and apply the calculations to each object.
+    and no math calculations are performed inside the for loop
+
+5. Reduce Paint Time
+    in the style.css, I updated the 'mover' class to include
+    will-change: transform and transform: translateZ(0);
+    this only painting the pizza objects instead of the whole screen
+
+------------------------------------------------------------------------------
 To get started, check out the repository, inspect the code,
 
 ### Getting started

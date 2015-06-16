@@ -451,10 +451,12 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
 
+      //get all pizzas using the getElementsByClassName method
+      //this method is much faster than querySelectorAll
       var ramdomPizzas = document.getElementsByClassName('randomPizzaContainer');
 
-      //alert(size);
-      var pizzaContainerwidth = "33.33%";
+      //Set the percentage width in this case statement
+      //replacing the 'determineDx' function, which is very expensive
       switch(size) {
           case "1":
               newwidth = 25;
@@ -469,19 +471,15 @@ var resizePizzas = function(size) {
               console.log("bug in sizeSwitcher");
       }
 
+      //Add all the ramdomPizzas object to an object array
 	  var elemArray = Array.prototype.slice.apply(ramdomPizzas);
 
+      //iterate the object array and apply the chosen width
+      //no calculations inside the loop are necessary
 	  for(var i = 0; i < elemArray.length; i++){
           elemArray[i].style.width = newwidth +'%';
       }
 
-      /*
-      for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
-    }
-      */
 
   }
 
@@ -498,6 +496,8 @@ window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 12; i++) {
+    //There's no need to create 200 pizza objects, a minimum of 12 is acceptable
+    //the less pizza object the least time it takes to paint
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
@@ -530,31 +530,27 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+    //get all pizzas using the getElementsByClassName method
+    //this method is much faster than querySelectorAll
   var items = document.getElementsByClassName('mover');
 
+    //add all pizza objects to and object array
   var elemArray = Array.prototype.slice.apply(items);
 
-  var scrolltopitem = document.body.scrollTop;
-  
-  //calculate 5 phases
-  var phases = [];
-  for(var i=0; i<5;i++){
-	var phase = Math.sin((scrolltopitem / 1250) + (i % 5));
-	
-	phases[i] =  phase * 100;
-  }
-  
-  
+//get the document scrolltop value
+    var scrolltopitem = document.body.scrollTop;
+
+//calculate all five phases and added to an array
+    var phases = [];
+    for(var i=0; i<5;i++){
+        var phase = Math.sin((scrolltopitem / 1250) + (i % 5));
+
+        phases[i] =  phase * 100;
+    }
+
+  //iterate thru the object array and apply the animation + phases value
+  //no calculations are necessary inside the for loop
   for (var i = 0; i < elemArray.length; i++) {
-	//console.log('inside loop: ' + document.body.scrollTop)
-  
-    //var phase = Math.sin((scrolltopitem / 1250) + (i % 5));
-	//console.log('in loop; phase for ['+ i + '] is: ' + phase);
-    //elemArray[i].style.left = elemArray[i].basicLeft + 100 * phase + 'px';
-	
-	//console.log('elemArray[i].basicLeft =' + elemArray[i].basicLeft)
-	//var shiftitem = (i % 5);
-	//console.log('shiftitem is:' + shiftitem);
 	elemArray[i].style.left = elemArray[i].basicLeft + phases[i % 5] + 'px';
   }
   
