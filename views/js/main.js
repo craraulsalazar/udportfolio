@@ -537,10 +537,10 @@ function updatePositions() {
     //add all pizza objects to and object array
   var elemArray = Array.prototype.slice.apply(items);
 
-//get the document scrolltop value
+   //get the document scrolltop value
     var scrolltopitem = document.body.scrollTop;
 
-//calculate all five phases and added to an array
+    //calculate all five phases and added to an array
     var phases = [];
     for(var i=0; i<5;i++){
         var phase = Math.sin((scrolltopitem / 1250) + (i % 5));
@@ -572,6 +572,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+    //there are too many animated pizzas, let's narrow it down to 60
   for (var i = 0; i < 60; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
