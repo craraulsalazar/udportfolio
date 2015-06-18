@@ -2,6 +2,16 @@
 
 Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
 
+## Steps to run optimized index.html ####
+
+go to
+https://developers.google.com/speed/pagespeed/insights/
+
+and analyze my page
+
+http://craraulsalazar.github.io/udportfolio/index.html
+
+
 ## Steps to optimazed main.js for pizza.html ####
 
 1.  Reduce number pizza objects.
