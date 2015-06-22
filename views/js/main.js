@@ -202,15 +202,15 @@ function getAdj(x){
     case "scientific":
       var scientific = ["scientific", "technical", "digital", "programming", "calculating", "formulating", "cyberpunk", "mechanical", "technological", 
       "innovative", "brainy", "chemical", "quantum", "astro", "space", "theoretical", "atomic", "electronic", "gaseous", "investigative", "solar", 
-      "extinct", "galactic"]
+      "extinct", "galactic"];
       return scientific;
     default:
-      var scientific = ["scientific", "technical", "digital", "programming", "calculating", "formulating", "cyberpunk", "mechanical", "technological", 
+      var isdefault = ["scientific", "technical", "digital", "programming", "calculating", "formulating", "cyberpunk", "mechanical", "technological", 
       "innovative", "brainy", "chemical", "quantum", "astro", "space", "theoretical", "atomic", "electronic", "gaseous", "investigative", "solar", 
-      "extinct", "galactic"]
-      return scientific;
-  };
-};
+      "extinct", "galactic"];
+      return isdefault;
+  }
+}
 
 // Pulls noun out of array using random number sent from generator
 function getNoun(y) {
@@ -274,13 +274,13 @@ function getNoun(y) {
       "universe", "gravity", "darkMatter", "constellation", "circuit", "asteroid"];
       return scifi;
     default:
-      var scifi = ["robot", "alien", "raygun", "spaceship", "UFO", "rocket", "phaser", "astronaut", "spaceman", "planet", "star", "galaxy", 
+      var isdefault = ["robot", "alien", "raygun", "spaceship", "UFO", "rocket", "phaser", "astronaut", "spaceman", "planet", "star", "galaxy", 
       "computer", "future", "timeMachine", "wormHole", "timeTraveler", "scientist", "invention", "martian", "pluto", "jupiter", "saturn", "mars",
       "quasar", "blackHole", "warpDrive", "laser", "orbit", "gears", "molecule", "electron", "neutrino", "proton", "experiment", "photon", "apparatus",
       "universe", "gravity", "darkMatter", "constellation", "circuit", "asteroid"];
-      return scifi;
-  }; 
-};
+      return isdefault;
+  } 
+}
 
 var adjectives = ["dark", "color", "whimsical", "shiny", "noise", "apocalyptic", "insulting", "praise", "scientific"];  // types of adjectives for pizza titles
 var nouns = ["animals", "everyday", "fantasy", "gross", "horror", "jewelry", "places", "scifi"];                        // types of nouns for pizza titles
@@ -293,44 +293,44 @@ function generator(adj, noun) {
   var randomNoun = parseInt(Math.random() * nouns.length);
   var name = "The " + adjectives[randomAdjective].capitalize() + " " + nouns[randomNoun].capitalize();
   return name;
-};
+}
 
 // Chooses random adjective and random noun
 function randomName() {
   var randomNumberAdj = parseInt(Math.random() * adjectives.length);
   var randomNumberNoun = parseInt(Math.random() * nouns.length);
   return generator(adjectives[randomNumberAdj], nouns[randomNumberNoun]);
-};
+}
 
 // These functions return a string of a random ingredient from each respective category of ingredients.
 var selectRandomMeat = function() {
   var randomMeat = pizzaIngredients.meats[Math.floor((Math.random() * pizzaIngredients.meats.length))];
   return randomMeat;
-}
+};
 
 var selectRandomNonMeat = function() {
   var randomNonMeat = pizzaIngredients.nonMeats[Math.floor((Math.random() * pizzaIngredients.nonMeats.length))];
   return randomNonMeat;
-}
+};
 
 var selectRandomCheese = function() {
   var randomCheese = pizzaIngredients.cheeses[Math.floor((Math.random() * pizzaIngredients.cheeses.length))];
   return randomCheese;
-}
+};
 
 var selectRandomSauce = function() {
   var randomSauce = pizzaIngredients.sauces[Math.floor((Math.random() * pizzaIngredients.sauces.length))];
   return randomSauce;
-}
+};
 
 var selectRandomCrust = function() {
   var randomCrust = pizzaIngredients.crusts[Math.floor((Math.random() * pizzaIngredients.crusts.length))];
   return randomCrust;
-}
+};
 
 var ingredientItemizer = function(string) {
   return "<li>" + string + "</li>";
-}
+};
 
 // Returns a string with random pizza ingredients nested inside <li> tags
 var makeRandomPizza = function() {
@@ -340,15 +340,16 @@ var makeRandomPizza = function() {
   var numberOfNonMeats = Math.floor((Math.random() * 3));
   var numberOfCheeses = Math.floor((Math.random() * 2));
 
-  for (var i = 0; i < numberOfMeats; i++) {
+  var i;
+  for (i = 0; i < numberOfMeats; i++) {
     pizza = pizza + ingredientItemizer(selectRandomMeat());
   }
 
-  for (var i = 0; i < numberOfNonMeats; i++) {
+  for (i = 0; i < numberOfNonMeats; i++) {
     pizza = pizza + ingredientItemizer(selectRandomNonMeat());
   }
 
-  for (var i = 0; i < numberOfCheeses; i++) {
+  for (i = 0; i < numberOfCheeses; i++) {
     pizza = pizza + ingredientItemizer(selectRandomCheese());
   }
 
@@ -356,7 +357,7 @@ var makeRandomPizza = function() {
   pizza = pizza + ingredientItemizer(selectRandomCrust());
 
   return pizza;
-}
+};
 
 // returns a DOM element for each pizza
 var pizzaElementGenerator = function(i) {
@@ -396,7 +397,7 @@ var pizzaElementGenerator = function(i) {
   pizzaContainer.appendChild(pizzaDescriptionContainer);
 
   return pizzaContainer;
-}
+};
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) { 
@@ -457,6 +458,7 @@ var resizePizzas = function(size) {
 
       //Set the percentage width in this case statement
       //replacing the 'determineDx' function, which is very expensive
+	  var newwidth=0;
       switch(size) {
           case "1":
               newwidth = 25;
@@ -476,7 +478,9 @@ var resizePizzas = function(size) {
 
       //iterate the object array and apply the chosen width
       //no calculations inside the loop are necessary
-	  for(var i = 0; i < elemArray.length; i++){
+	  //save array length in variable
+	  var elemArraylen = elemArray.length;
+	  for(var i = 0; i < elemArraylen; i++){
           elemArray[i].style.width = newwidth +'%';
       }
 
@@ -490,15 +494,18 @@ var resizePizzas = function(size) {
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
   var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
   console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms");
-}
+};
 
 window.performance.mark("mark_start_generating"); // collect timing data
+
+//make one call only for randomPizzas
+var pizzasDiv = document.getElementById("randomPizzas");
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 12; i++) {
     //There's no need to create 200 pizza objects, a minimum of 12 is acceptable
     //the less pizza object the least time it takes to paint
-  var pizzasDiv = document.getElementById("randomPizzas");
+  
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -530,28 +537,32 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-    //get all pizzas using the getElementsByClassName method
-    //this method is much faster than querySelectorAll
+  //get all pizzas using the getElementsByClassName method
+  //this method is much faster than querySelectorAll
   var items = document.getElementsByClassName('mover');
 
-    //add all pizza objects to and object array
+  //add all pizza objects to and object array
   var elemArray = Array.prototype.slice.apply(items);
 
-   //get the document scrolltop value
-    var scrolltopitem = document.body.scrollTop;
+  //get the document scrolltop value
+  var scrolltopitem = document.body.scrollTop;
 
-    //calculate all five phases and added to an array
-    var phases = [];
-    for(var i=0; i<5;i++){
-        var phase = Math.sin((scrolltopitem / 1250) + (i % 5));
-
-        phases[i] =  phase * 100;
-    }
+  //calculate all five phases and added to an array
+  var phases = [];
+  var i;
+  for(i=0; i<5;i++){
+    var phase = Math.sin((scrolltopitem / 1250) + (i % 5));
+    phases[i] =  phase * 100;
+  }
 
   //iterate thru the object array and apply the animation + phases value
   //no calculations are necessary inside the for loop
-  for (var i = 0; i < elemArray.length; i++) {
-	elemArray[i].style.left = elemArray[i].basicLeft + phases[i % 5] + 'px';
+  for (i = 0; i < elemArray.length; i++) {
+    
+	//elemArray[i].style.left = elemArray[i].basicLeft + phases[i % 5] + 'px';
+	//use translateX property for better performance
+	var newpos = phases[i % 5];
+	elemArray[i].style.transform = 'translateX(' + newpos + 'px)';
   }
   
 
@@ -572,16 +583,20 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-    //there are too many animated pizzas, let's narrow it down to 60
-  for (var i = 0; i < 60; i++) {
-    var elem = document.createElement('img');
+  var elem;
+  //there are too many animated pizzas, let's narrow it down to 60
+  for (var i = 0; i < 40; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
+	elem.style.left = elem.basicLeft + 'px';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    
+	//get better performance with getElementById
+	document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
-});
+  });
