@@ -584,7 +584,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var elem;
-  //there are too many animated pizzas, let's narrow it down to 60
+  //there are too many animated pizzas, let's narrow it down to 40
   for (var i = 0; i < 40; i++) {
     elem = document.createElement('img');
     elem.className = 'mover';

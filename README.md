@@ -19,9 +19,9 @@ http://craraulsalazar.github.io/udportfolio/index.html
     the less pizza objects created,  the least time it takes to paint
 
 2. Reduce number of sliding pizzas
-    in line 577. There's no need to create 200 animated pizzas. a minimum of 60 is acceptable
+    in line 577. There's no need to create 200 animated pizzas. a minimum of 40 is acceptable
 
-3. Refactor function changePizzaSizes in line 452. (Reducing Scripting Time)
+3. Refactor function changePizzaSizes in line 453. (Reducing Scripting Time)
 
   I have remove 'document.querySelectorAll(".randomPizzaContainer")' from the function and inside the for loop
   instead, I used the 'document.getElementsByClassName' function.
@@ -30,7 +30,7 @@ http://craraulsalazar.github.io/udportfolio/index.html
   therefore, all calculations are done before hitting the loop.
 
 
- 4. Refactor updatePositions function in line 529
+ 4. Refactor updatePositions function in line 536
 
     I have remove 'document.querySelectorAll(".randomPizzaContainer")' from the function, instead, I used the 'document.getElementsByClassName' function.
     Added the pizza objects to an array object
@@ -38,7 +38,10 @@ http://craraulsalazar.github.io/udportfolio/index.html
     Iterate thru all the element array and apply the calculations to each object.
     and no math calculations are performed inside the for loop
 
-5. Reduce Paint Time
+5. Refactor document.addEventListener in line 583
+   Replace document.queryselector by document.getelementId
+   
+6. Reduce Paint Time
     in the style.css, I updated the 'mover' class to include
     will-change: transform and transform: translateZ(0);
     this only painting the pizza objects instead of the whole screen
