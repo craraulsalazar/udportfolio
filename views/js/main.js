@@ -558,11 +558,10 @@ function updatePositions() {
   //iterate thru the object array and apply the animation + phases value
   //no calculations are necessary inside the for loop
   for (i = 0; i < elemArray.length; i++) {
-    
-	//elemArray[i].style.left = elemArray[i].basicLeft + phases[i % 5] + 'px';
-	//use translateX property for better performance
-	var newpos = phases[i % 5];
-	elemArray[i].style.transform = 'translateX(' + newpos + 'px)';
+    //elemArray[i].style.left = elemArray[i].basicLeft + phases[i % 5] + 'px';
+    //use translateX property for better performance
+    var newpos = phases[i % 5];
+    elemArray[i].style.transform = 'translateX(' + newpos + 'px)';
   }
   
 
