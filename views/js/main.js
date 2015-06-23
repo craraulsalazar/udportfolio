@@ -452,37 +452,37 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
 
-      //get all pizzas using the getElementsByClassName method
-      //this method is much faster than querySelectorAll
-      var ramdomPizzas = document.getElementsByClassName('randomPizzaContainer');
+    //get all pizzas using the getElementsByClassName method
+    //this method is much faster than querySelectorAll
+    var ramdomPizzas = document.getElementsByClassName('randomPizzaContainer');
 
-      //Set the percentage width in this case statement
-      //replacing the 'determineDx' function, which is very expensive
-	  var newwidth=0;
-      switch(size) {
-          case "1":
-              newwidth = 25;
-			  break;
-          case "2":
-              newwidth = 33.33;
-			  break;
-          case "3":
-              newwidth = 50;
-			  break;
-          default:
-              console.log("bug in sizeSwitcher");
-      }
+    //Set the percentage width in this case statement
+    //replacing the 'determineDx' function, which is very expensive
+	var newwidth=0;
+    switch(size) {
+      case "1":
+        newwidth = 25;
+        break;
+      case "2":
+        newwidth = 33.33;
+        break;
+      case "3":
+        newwidth = 50;
+        break;
+      default:
+        console.log("bug in sizeSwitcher");
+    }
 
-      //Add all the ramdomPizzas object to an object array
-	  var elemArray = Array.prototype.slice.apply(ramdomPizzas);
+    //Add all the ramdomPizzas object to an object array
+    var elemArray = Array.prototype.slice.apply(ramdomPizzas);
 
-      //iterate the object array and apply the chosen width
-      //no calculations inside the loop are necessary
-	  //save array length in variable
-	  var elemArraylen = elemArray.length;
-	  for(var i = 0; i < elemArraylen; i++){
-          elemArray[i].style.width = newwidth +'%';
-      }
+    //iterate the object array and apply the chosen width
+    //no calculations inside the loop are necessary
+	//save array length in variable
+    var elemArraylen = elemArray.length;
+    for(var i = 0; i < elemArraylen; i++){
+        elemArray[i].style.width = newwidth +'%';
+    }
 
 
   }
@@ -591,11 +591,11 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
-	elem.style.left = elem.basicLeft + 'px';
+    elem.style.left = elem.basicLeft + 'px';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     
-	//get better performance with getElementById
-	document.getElementById("movingPizzas1").appendChild(elem);
+    //get better performance with getElementById
+    document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
   });
