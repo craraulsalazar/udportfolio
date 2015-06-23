@@ -458,7 +458,7 @@ var resizePizzas = function(size) {
 
     //Set the percentage width in this case statement
     //replacing the 'determineDx' function, which is very expensive
-	var newwidth=0;
+    var newwidth=0;
     switch(size) {
       case "1":
         newwidth = 25;
